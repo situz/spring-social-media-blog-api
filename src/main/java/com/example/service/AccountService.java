@@ -25,4 +25,14 @@ public class AccountService {
             return null;
         }
     }
+
+    public Account login(Account account){
+        Optional<Account> loginAccount = accountRepository.findByUsernameAndPassword(account.getUsername(), account.getPassword());
+        if (loginAccount.isPresent()){
+            return loginAccount.get();
+        }
+        else{
+            return null;
+        }
+    }
 }
