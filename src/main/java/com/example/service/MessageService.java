@@ -59,5 +59,18 @@ public class MessageService {
         return 0;
     }
 
+    public int patchMessageByIdAndMessageText(int id, String messageText){
+        if ((messageText == null) || (messageText.length() <= 0) || (messageText.length() > 255)){
+            return 0;
+        }
+        if (messageRepository.existsById(id) == true){
+            Message message = messageRepository.findById(id).get();
+            message.setMessageText(messageText);
+            messageRepository.save(message);
+            return 1;
+        }
+        return 0;
+    }
+
 
 }
