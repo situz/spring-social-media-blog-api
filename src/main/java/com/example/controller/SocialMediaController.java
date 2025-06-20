@@ -39,5 +39,16 @@ public class SocialMediaController {
         }
     }
 
+    @PostMapping("login")
+    public ResponseEntity<Account> login(@RequestBody Account account){
+        Account loginAccount = accountService.login(account);
+        if (loginAccount != null){
+            return ResponseEntity.ok(loginAccount);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
 
 }
