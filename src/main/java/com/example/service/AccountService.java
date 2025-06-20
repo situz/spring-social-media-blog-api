@@ -14,16 +14,15 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
     public Account register(Account account){
-        Optional<Account> accountOptional = accountRepository.findByUsername(account.getUsername());
-        if (accountOptional.isPresent()){
-            return null;
+        if ((account.getUsername() != null) && (account.getUsername().length() > 0) && (account.getPassword() != null) && (account.getPassword().length() >= 4)){
+            if(accountRepository.findByUsername(account.getUsername()).isPresent()){
+                return null;
+            }
+            Account newAccount = new Account(account.getUsername(), account.getPassword());
+            return accountRepository.save(newAccount);
         }
         else{
-            Account newAccount = accountOptional.get();
-            if ((newAccount.getUsername() != null) && (newAccount.getPassword().length() >= 4)){
-                return newAccount;
-            }
+            return null;
         }
-        return null;
     }
 }
