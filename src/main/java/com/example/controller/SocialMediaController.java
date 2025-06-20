@@ -26,12 +26,16 @@ public class SocialMediaController {
 
     @PostMapping("register")
     public ResponseEntity<Account> register(@RequestBody Account account){
+        if  (!((account.getUsername() != null) && (account.getUsername().length() > 0) && (account.getPassword() != null) && (account.getPassword().length() >= 4))){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
         Account newAccount = accountService.register(account);
         if (newAccount != null){
             return ResponseEntity.ok(newAccount);
         }
         else{
-            return ResponseEntity.status(HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
 
