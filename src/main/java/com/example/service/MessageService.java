@@ -72,5 +72,10 @@ public class MessageService {
         return 0;
     }
 
+    public List<Message> getAllMessagesByPostedBy(int postedBy){
+        List<Message> allMessages = messageRepository.findMessagesByPostedBy(postedBy);
+        return allMessages;
+    }
+
 
 }
