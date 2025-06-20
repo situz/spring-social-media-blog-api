@@ -51,5 +51,13 @@ public class MessageService {
         }
     }
 
+    public int deleteMessageById(int id){
+        if (getMessageById(id) != null){
+            messageRepository.deleteById(id);
+            return 1;
+        }
+        return 0;
+    }
+
 
 }
